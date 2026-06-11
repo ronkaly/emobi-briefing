@@ -1350,6 +1350,40 @@ img { max-width: 100%; display: block; }
   stroke: var(--bg-deep);
 }
 
+/* Custom Idea Write-in */
+.custom-idea-box {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed var(--white-20);
+  border-radius: 12px;
+  transition: var(--transition-fast);
+}
+.custom-idea-box:focus-within {
+  border-color: var(--yellow-50);
+  background: rgba(245, 197, 24, 0.02);
+  box-shadow: 0 0 15px rgba(245, 197, 24, 0.05);
+}
+.custom-idea-icon {
+  font-size: 16px;
+  opacity: 0.8;
+}
+.custom-idea-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: var(--white-90);
+  font-family: inherit;
+}
+.custom-idea-input::placeholder {
+  color: var(--white-30);
+}
+
 /* Demo Highlight */
 .demo-highlight {
   display: flex;

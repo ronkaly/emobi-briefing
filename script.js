@@ -368,6 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedIdeas.push(tag.textContent.trim());
       });
 
+      // Collect custom write-in idea if filled
+      const customIdea = document.getElementById('customIdea')?.value.trim();
+      if (customIdea) {
+        selectedIdeas.push(`Personalizado: ${customIdea}`);
+      }
+
       console.log('%c📝 CONFIRMAÇÃO DE PRESENÇA REGISTRADA:', 'color: #22C55E; font-weight: bold; font-size: 14px;');
       console.log(`Nome: ${name}`);
       console.log(`WhatsApp: ${phone}`);
