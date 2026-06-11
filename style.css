@@ -559,6 +559,14 @@ img { max-width: 100%; display: block; }
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 40px;
 }
 .visual-glow {
   position: absolute;
@@ -578,10 +586,21 @@ img { max-width: 100%; display: block; }
   z-index: 1;
   box-shadow: var(--shadow-lg);
 }
+.logo-hero-large {
+  width: 65%;
+  max-width: 280px;
+  height: auto;
+  filter: drop-shadow(0 0 35px rgba(245, 197, 24, 0.3));
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+}
+.logo-hero-large:hover {
+  transform: scale(1.06) rotate(3deg);
+  filter: drop-shadow(0 0 45px rgba(245, 197, 24, 0.45));
+}
 .visual-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(5,5,5,0.6) 100%);
+  background: radial-gradient(circle at center, transparent 30%, rgba(5,5,5,0.4) 100%);
   z-index: 2;
   border-radius: var(--radius-lg);
   pointer-events: none;
