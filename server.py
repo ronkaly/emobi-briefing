@@ -3,6 +3,8 @@ import socketserver
 import json
 import sqlite3
 import os
+import io
+import csv
 
 PORT = 8000
 DB_VOTES = 'votacao_novos_servicos.db'
@@ -125,6 +127,69 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 self.end_headers()
                 response = {'status': 'error', 'message': str(e)}
                 self.wfile.write(json.dumps(response).encode('utf-8'))
+
+        elif self.path == '/api/admin/export':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                username = data.get('username', '')
+                password = data.get('password', '')
+                export_type = data.get('type', '')
+                
+                if username == 'admin' and password == 'C3lul4r':
+                    output = io.StringIO()
+                    writer = csv.writer(output, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                    
+                    if export_type == 'votos':
+                        # Fetch votes
+                        conn = sqlite3.connect(DB_VOTES)
+                        cursor = conn.cursor()
+                        cursor.execute("SELECT id, timestamp, opcoes, sugestao_personalizada FROM votos")
+                        rows = cursor.fetchall()
+                        conn.close()
+                        
+                        writer.writerow(['ID', 'Data/Hora', 'Opções Selecionadas', 'Sugestão Personalizada'])
+                        for r in rows:
+                            writer.writerow(r)
+                            
+                    elif export_type == 'presencas':
+                        # Fetch RSVPs
+                        conn = sqlite3.connect(DB_PRESENCA)
+                        cursor = conn.cursor()
+                        cursor.execute("SELECT id, timestamp, nome, whatsapp, cargo, feedback, simular_imoveis, testar_whatsapp, habilidades_sugeridas FROM presencas")
+                        rows = cursor.fetchall()
+                        conn.close()
+                        
+                        writer.writerow(['ID', 'Data/Hora', 'Nome', 'WhatsApp', 'Cargo', 'Dúvidas/Sugestões', 'Simular Imóveis (1=Sim)', 'Testar WhatsApp (1=Sim)', 'Habilidades Sugeridas'])
+                        for r in rows:
+                            writer.writerow(r)
+                    else:
+                        raise ValueError("Tipo de exportação inválido.")
+                        
+                    csv_data = output.getvalue()
+                    output.close()
+                    
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'text/csv; charset=utf-8')
+                    self.send_header('Content-Disposition', f'attachment; filename=export_{export_type}.csv')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    # Use utf-8-sig (with BOM) so Excel opens it correctly with all Portuguese accents
+                    self.wfile.write(csv_data.encode('utf-8-sig'))
+                else:
+                    self.send_response(401)
+                    self.send_header('Content-Type', 'application/json')
+                    self.send_header('Access-Control-Allow-Origin', '*')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({'status': 'error', 'message': 'Credenciais inválidas.'}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'status': 'error', 'message': str(e)}).encode('utf-8'))
         else:
             self.send_response(404)
             self.end_headers()

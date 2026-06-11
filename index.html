@@ -606,10 +606,53 @@
       <div class="footer-divider"></div>
       <div class="footer-bottom">
         <span>Briefing estratégico para os Corretores da <strong>EMOBI — Natal/RN</strong></span>
-        <span>© 2026 ACORI · Todos os direitos reservados</span>
+        <div class="footer-bottom-right">
+          <span>© 2026 ACORI · Todos os direitos reservados</span>
+          <button type="button" class="btn-adm" id="btnOpenAdm">ADM</button>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- ═══ ADMIN PANEL MODAL ═══ -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-modal-content">
+      <div class="admin-modal-header">
+        <h3>Painel de Administração</h3>
+        <button class="admin-close-btn" id="btnCloseAdm">✕</button>
+      </div>
+      
+      <!-- Login State -->
+      <div class="admin-state" id="adminLoginState">
+        <form class="admin-form" id="adminLoginForm">
+          <div class="admin-form-group">
+            <label for="adminUser">Usuário</label>
+            <input type="text" id="adminUser" class="admin-input" placeholder="Digite o usuário" required />
+          </div>
+          <div class="admin-form-group">
+            <label for="adminPass">Senha</label>
+            <input type="password" id="adminPass" class="admin-input" placeholder="Digite a senha" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-admin-submit" id="btnAdminLogin">Logar</button>
+          <div class="admin-error-message" id="adminLoginError"></div>
+        </form>
+      </div>
+
+      <!-- Export State -->
+      <div class="admin-state" id="adminExportState" style="display: none;">
+        <p style="margin-bottom: 20px; font-size: 13px; color: var(--white-70);">Acesse e exporte os bancos de dados do briefing como planilhas CSV.</p>
+        <div class="admin-export-actions">
+          <button type="button" class="btn btn-primary btn-export" id="btnExportVotos">
+            <span>Exportar Votações (CSV)</span>
+          </button>
+          <button type="button" class="btn btn-primary btn-export" id="btnExportPresencas">
+            <span>Exportar Presenças (CSV)</span>
+          </button>
+        </div>
+        <button type="button" class="btn-admin-logout" id="btnAdminLogout">Sair do Painel</button>
+      </div>
+    </div>
+  </div>
 
   <!-- JavaScript -->
   <script src="script.js"></script>

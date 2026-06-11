@@ -565,4 +565,128 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ─── ADMIN PANEL SYSTEM ───
+  const adminModal = document.getElementById('adminModal');
+  const btnOpenAdm = document.getElementById('btnOpenAdm');
+  const btnCloseAdm = document.getElementById('btnCloseAdm');
+  const adminLoginForm = document.getElementById('adminLoginForm');
+  const adminLoginState = document.getElementById('adminLoginState');
+  const adminExportState = document.getElementById('adminExportState');
+  const adminLoginError = document.getElementById('adminLoginError');
+  const btnAdminLogout = document.getElementById('btnAdminLogout');
+  const btnExportVotos = document.getElementById('btnExportVotos');
+  const btnExportPresencas = document.getElementById('btnExportPresencas');
+
+  let adminUserVal = '';
+  let adminPassVal = '';
+
+  if (btnOpenAdm && adminModal) {
+    btnOpenAdm.addEventListener('click', () => {
+      adminModal.style.display = 'flex';
+      setTimeout(() => {
+        adminModal.classList.add('active');
+      }, 10);
+    });
+  }
+
+  if (btnCloseAdm && adminModal) {
+    btnCloseAdm.addEventListener('click', closeAdminModal);
+  }
+
+  if (adminModal) {
+    adminModal.addEventListener('click', (e) => {
+      if (e.target === adminModal) {
+        closeAdminModal();
+      }
+    });
+  }
+
+  function closeAdminModal() {
+    if (!adminModal) return;
+    adminModal.classList.remove('active');
+    setTimeout(() => {
+      adminModal.style.display = 'none';
+      if (adminExportState.style.display === 'none') {
+        adminLoginForm.reset();
+        adminLoginError.textContent = '';
+      }
+    }, 300);
+  }
+
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('adminUser').value.trim();
+      const pass = document.getElementById('adminPass').value;
+
+      if (user === 'admin' && pass === 'C3lul4r') {
+        adminUserVal = user;
+        adminPassVal = pass;
+        adminLoginError.textContent = '';
+        adminLoginState.style.display = 'none';
+        adminExportState.style.display = 'block';
+      } else {
+        adminLoginError.textContent = 'Usuário ou senha incorretos.';
+      }
+    });
+  }
+
+  if (btnAdminLogout) {
+    btnAdminLogout.addEventListener('click', () => {
+      adminUserVal = '';
+      adminPassVal = '';
+      adminExportState.style.display = 'none';
+      adminLoginState.style.display = 'block';
+      adminLoginForm.reset();
+      adminLoginError.textContent = '';
+    });
+  }
+
+  async function downloadCsv(type) {
+    if (adminUserVal !== 'admin' || adminPassVal !== 'C3lul4r') {
+      alert('Sessão expirada ou inválida.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/api/admin/export', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: adminUserVal,
+          password: adminPassVal,
+          type: type
+        })
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `export_${type}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        const errJson = await response.json();
+        alert('Erro ao exportar: ' + (errJson.message || 'Desconhecido'));
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Erro de conexão com o servidor local.');
+    }
+  }
+
+  if (btnExportVotos) {
+    btnExportVotos.addEventListener('click', () => downloadCsv('votos'));
+  }
+  if (btnExportPresencas) {
+    btnExportPresencas.addEventListener('click', () => downloadCsv('presencas'));
+  }
+
 });
