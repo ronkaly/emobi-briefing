@@ -5,13 +5,15 @@ import sqlite3
 import os
 
 PORT = 8000
-DB_FILE = 'votacao_novos_servicos.db'
+DB_VOTES = 'votacao_novos_servicos.db'
+DB_PRESENCA = 'lista_de_presenca.db'
 
-# Initialize Database
+# Initialize Databases
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute('''
+    # Database for voting
+    conn1 = sqlite3.connect(DB_VOTES)
+    cursor1 = conn1.cursor()
+    cursor1.execute('''
         CREATE TABLE IF NOT EXISTS votos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -19,8 +21,27 @@ def init_db():
             sugestao_personalizada TEXT
         )
     ''')
-    conn.commit()
-    conn.close()
+    conn1.commit()
+    conn1.close()
+
+    # Database for RSVP / Confirmation
+    conn2 = sqlite3.connect(DB_PRESENCA)
+    cursor2 = conn2.cursor()
+    cursor2.execute('''
+        CREATE TABLE IF NOT EXISTS presencas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            nome TEXT,
+            whatsapp TEXT,
+            cargo TEXT,
+            feedback TEXT,
+            simular_imoveis INTEGER,
+            testar_whatsapp INTEGER,
+            habilidades_sugeridas TEXT
+        )
+    ''')
+    conn2.commit()
+    conn2.close()
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -42,7 +63,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 sugestao = data.get('sugestao', '')
                 
                 # Save to database
-                conn = sqlite3.connect(DB_FILE)
+                conn = sqlite3.connect(DB_VOTES)
                 cursor = conn.cursor()
                 cursor.execute(
                     'INSERT INTO votos (opcoes, sugestao_personalizada) VALUES (?, ?)',
@@ -56,6 +77,46 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 response = {'status': 'success', 'message': 'Voto registrado com sucesso!'}
+                self.wfile.write(json.dumps(response).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                response = {'status': 'error', 'message': str(e)}
+                self.wfile.write(json.dumps(response).encode('utf-8'))
+
+        elif self.path == '/api/confirmar':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                nome = data.get('nome', '')
+                whatsapp = data.get('whatsapp', '')
+                cargo = data.get('cargo', '')
+                feedback = data.get('feedback', '')
+                simular_imoveis = 1 if data.get('simular_imoveis', False) else 0
+                testar_whatsapp = 1 if data.get('testar_whatsapp', False) else 0
+                habilidades = data.get('habilidades', [])
+                
+                # Save to database
+                conn = sqlite3.connect(DB_PRESENCA)
+                cursor = conn.cursor()
+                cursor.execute(
+                    '''INSERT INTO presencas 
+                       (nome, whatsapp, cargo, feedback, simular_imoveis, testar_whatsapp, habilidades_sugeridas) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?)''',
+                    (nome, whatsapp, cargo, feedback, simular_imoveis, testar_whatsapp, json.dumps(habilidades, ensure_ascii=False))
+                )
+                conn.commit()
+                conn.close()
+                
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                response = {'status': 'success', 'message': 'Confirmação registrada com sucesso!'}
                 self.wfile.write(json.dumps(response).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)

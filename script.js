@@ -415,9 +415,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── RSVP FORM HANDLER ───
   const rsvpForm = document.getElementById('rsvpForm');
   const successState = document.getElementById('successState');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const submitStatus = document.getElementById('submitStatus');
 
   if (rsvpForm && successState) {
-    rsvpForm.addEventListener('submit', (e) => {
+    rsvpForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const name = document.getElementById('name').value;
@@ -439,25 +441,74 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedIdeas.push(`Personalizado: ${customIdea}`);
       }
 
-      console.log('%c📝 CONFIRMAÇÃO DE PRESENÇA REGISTRADA:', 'color: #22C55E; font-weight: bold; font-size: 14px;');
-      console.log(`Nome: ${name}`);
-      console.log(`WhatsApp: ${phone}`);
-      console.log(`Função na EMOBI: ${cargo}`);
-      console.log(`Dúvida/Sugestão: ${feedback || 'Nenhuma'}`);
-      console.log(`Deseja simulação com próprios imóveis: ${checkDemo ? 'Sim' : 'Não'}`);
-      console.log(`Deseja testar estagiário WhatsApp: ${checkZap ? 'Sim' : 'Não'}`);
-      console.log(`Habilidades sugeridas: ${selectedIdeas.join(', ') || 'Nenhuma'}`);
+      // Disable submit button during request
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.style.opacity = '0.7';
+      }
+      showSubmitStatus('Processando confirmação...', '');
 
-      // Transition out form
-      rsvpForm.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      rsvpForm.style.opacity = '0';
-      rsvpForm.style.transform = 'translateY(10px)';
+      try {
+        const response = await fetch('http://localhost:8000/api/confirmar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nome: name,
+            whatsapp: phone,
+            cargo: cargo,
+            feedback: feedback || '',
+            simular_imoveis: checkDemo,
+            testar_whatsapp: checkZap,
+            habilidades: selectedIdeas
+          })
+        });
 
-      setTimeout(() => {
-        rsvpForm.style.display = 'none';
-        successState.style.display = 'flex';
-      }, 400);
+        if (response.ok) {
+          showSubmitStatus('Confirmação salva!', 'success');
+
+          // Console logging
+          console.log('%c📝 CONFIRMAÇÃO DE PRESENÇA REGISTRADA:', 'color: #22C55E; font-weight: bold; font-size: 14px;');
+          console.log(`Nome: ${name}`);
+          console.log(`WhatsApp: ${phone}`);
+          console.log(`Função na EMOBI: ${cargo}`);
+          console.log(`Dúvida/Sugestão: ${feedback || 'Nenhuma'}`);
+          console.log(`Deseja simulação com próprios imóveis: ${checkDemo ? 'Sim' : 'Não'}`);
+          console.log(`Deseja testar estagiário WhatsApp: ${checkZap ? 'Sim' : 'Não'}`);
+          console.log(`Habilidades sugeridas: ${selectedIdeas.join(', ') || 'Nenhuma'}`);
+
+          // Transition out form
+          rsvpForm.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          rsvpForm.style.opacity = '0';
+          rsvpForm.style.transform = 'translateY(10px)';
+
+          setTimeout(() => {
+            rsvpForm.style.display = 'none';
+            successState.style.display = 'flex';
+          }, 400);
+        } else {
+          showSubmitStatus('Erro ao enviar confirmação.', 'error');
+          if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.style.opacity = '';
+          }
+        }
+      } catch (err) {
+        console.error(err);
+        showSubmitStatus('Erro de conexão. Certifique-se de que o servidor local está rodando na porta 8000.', 'error');
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.style.opacity = '';
+        }
+      }
     });
+  }
+
+  function showSubmitStatus(msg, type) {
+    if (!submitStatus) return;
+    submitStatus.textContent = msg;
+    submitStatus.className = 'submit-status-message ' + type;
   }
 
   // ─── PARALLAX on Hero Elements ───

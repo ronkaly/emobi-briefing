@@ -1414,6 +1414,26 @@ img { max-width: 100%; display: block; }
   color: #EF4444;
 }
 
+/* Submit Action Container */
+.submit-action-container {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.submit-status-message {
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+.submit-status-message.success {
+  color: #22C55E;
+}
+.submit-status-message.error {
+  color: #EF4444;
+}
+
 /* Demo Highlight */
 .demo-highlight {
   display: flex;
