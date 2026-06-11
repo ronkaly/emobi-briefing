@@ -194,7 +194,7 @@ img { max-width: 100%; display: block; }
   background: var(--white-20);
 }
 .logo-emobi {
-  height: 28px;
+  height: 38px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
@@ -1766,7 +1766,7 @@ img { max-width: 100%; display: block; }
     gap: 8px;
     text-align: center;
   }
-  .logo-emobi { height: 22px; }
+  .logo-emobi { height: 28px; }
   .logo-name { height: 14px; }
 
   .scroll-indicator { display: none; }
