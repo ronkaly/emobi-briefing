@@ -1298,18 +1298,18 @@ img { max-width: 100%; display: block; }
   margin-bottom: 16px;
 }
 .ideas-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 .idea-tag {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
+  gap: 10px;
+  padding: 12px 18px;
   background: var(--bg-card);
   border: 1px solid var(--white-10);
-  border-radius: var(--radius-pill);
+  border-radius: 12px;
   font-size: 13px;
   color: var(--white-70);
   cursor: pointer;
@@ -1781,6 +1781,13 @@ img { max-width: 100%; display: block; }
   .hero-title { font-size: 1.6rem; }
   .section-title { font-size: 1.6rem; }
 
-  .ideas-tags { gap: 6px; }
-  .idea-tag { padding: 8px 14px; font-size: 12px; }
+  .ideas-tags {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .idea-tag {
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
 }
