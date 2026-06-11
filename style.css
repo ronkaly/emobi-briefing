@@ -1384,6 +1384,36 @@ img { max-width: 100%; display: block; }
   color: var(--white-30);
 }
 
+/* Vote Action */
+.vote-action-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-vote {
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.vote-status-message {
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+.vote-status-message.success {
+  color: #22C55E;
+}
+.vote-status-message.error {
+  color: #EF4444;
+}
+
 /* Demo Highlight */
 .demo-highlight {
   display: flex;

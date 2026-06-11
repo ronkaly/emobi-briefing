@@ -347,6 +347,71 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ─── VOTE BUTTON HANDLER ───
+  const btnVote = document.getElementById('btnVote');
+  const voteStatus = document.getElementById('voteStatus');
+
+  if (btnVote) {
+    btnVote.addEventListener('click', async () => {
+      // Collect selected tags
+      const selectedIdeas = [];
+      document.querySelectorAll('.idea-tag.selected').forEach(tag => {
+        selectedIdeas.push(tag.textContent.trim());
+      });
+
+      const customIdeaVal = document.getElementById('customIdea')?.value.trim();
+
+      if (selectedIdeas.length === 0 && !customIdeaVal) {
+        showVoteStatus('Por favor, selecione pelo menos uma opção ou digite sua sugestão.', 'error');
+        return;
+      }
+
+      // Disable button during request
+      btnVote.disabled = true;
+      btnVote.style.opacity = '0.7';
+      showVoteStatus('Enviando seu voto...', '');
+
+      try {
+        const response = await fetch('http://localhost:8000/api/votar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            opcoes: selectedIdeas,
+            sugestao: customIdeaVal || ''
+          })
+        });
+
+        if (response.ok) {
+          showVoteStatus('Voto salvo com sucesso!', 'success');
+          // Reset custom idea input
+          if (document.getElementById('customIdea')) {
+            document.getElementById('customIdea').value = '';
+          }
+          // Deselect tags
+          document.querySelectorAll('.idea-tag.selected').forEach(tag => {
+            tag.classList.remove('selected');
+          });
+        } else {
+          showVoteStatus('Erro ao salvar voto no servidor.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showVoteStatus('Erro de conexão. Certifique-se de que o servidor local está rodando na porta 8000.', 'error');
+      } finally {
+        btnVote.disabled = false;
+        btnVote.style.opacity = '';
+      }
+    });
+  }
+
+  function showVoteStatus(msg, type) {
+    if (!voteStatus) return;
+    voteStatus.textContent = msg;
+    voteStatus.className = 'vote-status-message ' + type;
+  }
+
   // ─── RSVP FORM HANDLER ───
   const rsvpForm = document.getElementById('rsvpForm');
   const successState = document.getElementById('successState');
