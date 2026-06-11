@@ -2065,7 +2065,7 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--white-10);
   border-radius: var(--radius-pill);
   padding: 12px 28px;
-  margin-top: -10px;
+  margin-top: 24px;
   margin-bottom: 36px;
   backdrop-filter: blur(10px);
 }
