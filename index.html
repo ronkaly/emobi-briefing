@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMOBI Briefing — Solução ACORI para Corretores | Reunião Estratégica</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Briefing de Reunião Estratégica: como o ACORI atua como equipe de estagiários digitais à disposição de cada corretor EMOBI. IA aplicada ao mercado imobiliário de Natal/RN." />
+  <meta name="keywords" content="ACORI, EMOBI, Inteligência Artificial, Corretores de Imóveis, Imobiliária Natal, UFRN, SEBRAE, EMBRAPII" />
+  <meta name="author" content="ACORI" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EMOBI Briefing — Solução ACORI para Corretores" />
+  <meta property="og:description" content="Descubra como o ACORI transforma a rotina dos corretores EMOBI com estagiários digitais baseados em IA." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══ CURSOR GLOW ═══ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ═══ PROGRESS BAR ═══ -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo-group">
+        <div class="logo-acori">
+          <img src="assets/acori-icon.png" alt="ACORI" class="logo-icon" />
+          <img src="assets/acori-name.png" alt="ACORI" class="logo-name" />
+        </div>
+        <div class="logo-divider">
+          <span class="divider-line"></span>
+        </div>
+        <img src="assets/emobi-logo.png" alt="EMOBI" class="logo-emobi" />
+      </div>
+      <div class="nav-right">
+        <span class="nav-location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Natal/RN
+        </span>
+        <a href="#confirmar" class="nav-cta scroll-link" id="navCta">Confirmar Presença</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — HERO (CINEMATIC)
+  ═══════════════════════════════════════════ -->
+  <header class="section hero" id="inicio">
+    <!-- Layered Backgrounds -->
+    <div class="hero-bg-image"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-grain"></div>
+
+    <div class="section-inner hero-grid">
+      <div class="hero-content">
+        <!-- Animated Badge -->
+        <div class="meeting-badge reveal" id="heroBadge">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Briefing Estratégico · Reunião Exclusiva</span>
+        </div>
+
+        <h1 class="hero-title reveal delay-1">
+          <span class="title-line title-line-1">Sua equipe de</span>
+          <span class="title-line title-line-2">
+            <em>estagiários digitais</em>
+          </span>
+          <span class="title-line title-line-3">
+            para a <span class="brand-highlight">EMOBI</span>
+          </span>
+        </h1>
+
+        <p class="hero-lead reveal delay-2">
+          O <strong>ACORI</strong> é uma IA que cuida da burocracia invisível — cadastros, portais, agendamentos e qualificação de leads — para que cada corretor foque no que faz de melhor: o <em>trabalho humano</em> e o <em>fechamento da venda</em>.
+        </p>
+
+        <!-- Stats Row -->
+        <div class="hero-stats reveal delay-3">
+          <div class="stat-item">
+            <span class="stat-number" data-target="2">0</span>
+            <span class="stat-unit">min</span>
+            <span class="stat-label">p/ cadastrar imóvel</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="24">0</span>
+            <span class="stat-unit">/7</span>
+            <span class="stat-label">atendimento ativo</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="0">0</span>
+            <span class="stat-unit">formulários</span>
+            <span class="stat-label">preenchidos por você</span>
+          </div>
+        </div>
+
+        <div class="hero-actions reveal delay-4">
+          <a href="#pauta" class="btn btn-primary scroll-link" id="btnVerPauta">
+            <span>Ver Pauta da Reunião</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </a>
+          <a href="#estagiarios" class="btn btn-ghost scroll-link" id="btnConhecer">
+            <span>Conhecer os Estagiários</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual — Portal Image -->
+      <div class="hero-visual reveal delay-2">
+        <div class="visual-container">
+          <div class="visual-glow"></div>
+          <img src="assets/portal.png" alt="Portal ACORI — Visão do corretor caminhando em direção ao futuro" class="visual-image" id="portalImage" />
+          <div class="visual-overlay"></div>
+
+          <!-- Floating Credential Badge -->
+          <div class="floating-badge" id="floatingBadge">
+            <div class="fb-icon">
+              <img src="assets/acori-icon.png" alt="" />
+            </div>
+            <div class="fb-text">
+              <span class="fb-title">Tecnologia Potiguar</span>
+              <span class="fb-sub">UFRN/IMD · SEBRAE · EMBRAPII</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator reveal delay-5">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Role para baixo</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — DIGITAL INTERNS (ESTAGIÁRIOS)
+  ═══════════════════════════════════════════ -->
+  <section class="section interns-section" id="estagiarios">
+    <div class="bg-gradient-left"></div>
+    <div class="section-inner">
+      <div class="section-header text-center">
+        <span class="section-label reveal">Sua Nova Equipe</span>
+        <h2 class="section-title reveal delay-1">
+          Três assistentes de IA,<br />
+          <span>um único WhatsApp</span>
+        </h2>
+        <p class="section-desc reveal delay-2">
+          Cada um é especialista em uma frente diferente. Juntos, eliminam horas de trabalho repetitivo e transformam a maneira como o corretor opera.
+        </p>
+      </div>
+
+      <!-- Hint Banner -->
+      <div class="interns-hint reveal delay-3">
+        <div class="hint-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+        </div>
+        <span>Clique no card e veja seu estagiário em ação!</span>
+      </div>
+
+      <div class="interns-grid">
+        <!-- Intern Card 1 -->
+        <div class="intern-card reveal" id="internCadastro" data-chat="cadastro">
+          <div class="intern-card-glow"></div>
+          <div class="intern-number">01</div>
+          <div class="intern-icon-wrap">
+            <div class="intern-icon">🎙️</div>
+          </div>
+          <h3>O Estagiário de Cadastro</h3>
+          <p>Mande fotos e um áudio solto de 30 segundos. Em <strong>2 minutos</strong>, ele gera anúncios profissionais e estruturados — sem que você preencha um único formulário.</p>
+          <div class="intern-tags">
+            <span class="itag">Fotos</span>
+            <span class="itag">Áudio</span>
+            <span class="itag">Anúncio pronto</span>
+          </div>
+        </div>
+
+        <!-- Intern Card 2 -->
+        <div class="intern-card reveal delay-1" id="internMarketing" data-chat="marketing">
+          <div class="intern-card-glow"></div>
+          <div class="intern-number">02</div>
+          <div class="intern-icon-wrap">
+            <div class="intern-icon">📢</div>
+          </div>
+          <h3>O Estagiário de Marketing</h3>
+          <p>Publicação automática e <strong>multicanal</strong> nos principais portais imobiliários. Quando o imóvel é vendido, ele cria sugestões de posts para o Instagram.</p>
+          <div class="intern-tags">
+            <span class="itag">Portais</span>
+            <span class="itag">Instagram</span>
+            <span class="itag">Multicanal</span>
+          </div>
+        </div>
+
+        <!-- Intern Card 3 -->
+        <div class="intern-card reveal delay-2" id="internRecepcionista" data-chat="recepcionista">
+          <div class="intern-card-glow"></div>
+          <div class="intern-number">03</div>
+          <div class="intern-icon-wrap">
+            <div class="intern-icon">💬</div>
+          </div>
+          <h3>O Recepcionista 24/7</h3>
+          <p>Atendimento e qualificação de leads via WhatsApp. Filtra quem <strong>realmente quer comprar</strong> e já marca a visita direto na sua agenda.</p>
+          <div class="intern-tags">
+            <span class="itag">WhatsApp</span>
+            <span class="itag">Triagem</span>
+            <span class="itag">Agendamento</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp Live Demo (hidden by default, revealed on card click) -->
+      <div class="wpp-demo" id="wppDemo">
+        <div class="wpp-demo-label" id="wppDemoLabel">
+          <span class="wpp-demo-label-icon">🎙️</span>
+          <span class="wpp-demo-label-text">Estagiário de Cadastro em ação</span>
+        </div>
+        <div class="wpp-phone-frame">
+          <div class="wpp-notch"></div>
+          <div class="wpp-header">
+            <div class="wpp-header-left">
+              <div class="wpp-avatar">
+                <img src="assets/acori-icon.png" alt="ACORI" />
+              </div>
+              <div class="wpp-contact">
+                <span class="wpp-name">Assistente ACORI</span>
+                <span class="wpp-status">online agora</span>
+              </div>
+            </div>
+            <button class="wpp-close-btn" id="wppCloseBtn" aria-label="Fechar demo">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="wpp-body" id="wppChatBody">
+            <!-- Messages injected by JS -->
+          </div>
+          <div class="wpp-input-bar">
+            <div class="wpp-input-field">Mensagem...</div>
+            <div class="wpp-send-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — MEETING AGENDA (TIMELINE)
+  ═══════════════════════════════════════════ -->
+  <section class="section agenda-section" id="pauta">
+    <div class="bg-gradient-right"></div>
+    <div class="section-inner">
+      <div class="section-header text-center">
+        <span class="section-label reveal">Pauta da Reunião</span>
+        <h2 class="section-title reveal delay-1">
+          Agenda focada em <span>resultados</span>
+        </h2>
+        <p class="section-desc reveal delay-2">
+          Uma reunião prática para entender seus desafios e apresentar soluções de IA aplicadas ao mercado imobiliário de Natal.
+        </p>
+      </div>
+
+      <div class="timeline" id="timeline">
+        <!-- Timeline Track -->
+        <div class="timeline-track">
+          <div class="timeline-track-fill" id="timelineTrackFill"></div>
+        </div>
+
+        <!-- ITEM 1 -->
+        <div class="timeline-item reveal" data-step="1">
+          <div class="timeline-marker">
+            <div class="timeline-marker-ring"></div>
+            <div class="timeline-marker-dot"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="tl-tag">Apresentação</span>
+              <span class="tl-step">Etapa 01</span>
+            </div>
+            <h3>ACORI: Sua Equipe de Apoio no Bolso</h3>
+            <p>Conheça sua nova estrutura de suporte digital. Três assistentes de IA especializados que trabalham em conjunto diretamente pelo WhatsApp, poupando horas de tarefas repetitivas.</p>
+            <ul class="tl-bullets">
+              <li>Como transformar fotos e um áudio em anúncios profissionais em 2 minutos</li>
+              <li>Publicação automática e multicanal nos principais portais</li>
+              <li>Atendimento e qualificação de leads 24/7</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="timeline-item reveal" data-step="2">
+          <div class="timeline-marker">
+            <div class="timeline-marker-ring"></div>
+            <div class="timeline-marker-dot"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="tl-tag tl-tag-blue">Imersão</span>
+              <span class="tl-step">Etapa 02</span>
+            </div>
+            <h3>Imersão no Fluxo de Trabalho EMOBI</h3>
+            <p>Mapeamento das "tarefas de mesa" que hoje impedem o corretor de estar mais tempo na rua. Discussão sobre como a IA pode se adaptar aos processos específicos da imobiliária em Natal.</p>
+
+            <!-- Before/After Compare -->
+            <div class="compare-grid">
+              <div class="compare-box compare-before">
+                <div class="compare-label">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  Gargalos Atuais
+                </div>
+                <ul>
+                  <li>2h preenchendo fichas de cadastro de imóveis</li>
+                  <li>Leads do WhatsApp que esfriam sem resposta rápida</li>
+                  <li>Dificuldade de sincronizar visitas com clientes</li>
+                </ul>
+              </div>
+              <div class="compare-arrow">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+              <div class="compare-box compare-after">
+                <div class="compare-label">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  Com ACORI
+                </div>
+                <ul>
+                  <li>Cadastro via áudio no WhatsApp em 2 min</li>
+                  <li>IA responde leads instantaneamente e faz triagem</li>
+                  <li>Visita agendada direto na agenda sem atrito</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="timeline-item reveal" data-step="3">
+          <div class="timeline-marker">
+            <div class="timeline-marker-ring"></div>
+            <div class="timeline-marker-dot"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="tl-tag tl-tag-green">Co-criação</span>
+              <span class="tl-step">Etapa 03</span>
+            </div>
+            <h3>Co-criação e Feedback</h3>
+            <p>Espaço aberto para escutar os líderes e corretores da EMOBI. Quais novos "serviços" seus estagiários digitais deveriam aprender?</p>
+
+            <!-- Interactive Ideas Selector -->
+            <div class="ideas-box">
+              <h4>Selecione as habilidades mais úteis para validar:</h4>
+              <div class="ideas-tags" id="ideasGroup">
+                <div class="idea-tag" data-id="1">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  📄 Emissão Automática de Contratos
+                </div>
+                <div class="idea-tag" data-id="2">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  📊 Relatórios de Inteligência de Mercado
+                </div>
+                <div class="idea-tag" data-id="3">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  📈 Análise Preditiva de Preços em Natal
+                </div>
+                <div class="idea-tag" data-id="4">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  🔍 Pesquisa Automatizada de Certidões
+                </div>
+                <div class="idea-tag" data-id="5">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  📋 Script de Vendas Personalizado
+                </div>
+                <div class="idea-tag" data-id="6">
+                  <span class="idea-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  🤳 Geração de Vídeo-Anúncios de IA
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="timeline-item reveal" data-step="4">
+          <div class="timeline-marker">
+            <div class="timeline-marker-ring"></div>
+            <div class="timeline-marker-dot"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="tl-tag tl-tag-purple">Demonstração</span>
+              <span class="tl-step">Etapa 04</span>
+            </div>
+            <h3>Demonstração Prática e Próximos Passos</h3>
+            <p>Um teste ao vivo de como ativar seu assistente no WhatsApp e começar a "limpar a agenda" de tarefas chatas imediatamente. Sem custos de treinamento, sem softwares novos.</p>
+            <div class="demo-highlight">
+              <div class="demo-highlight-icon">⚡</div>
+              <div class="demo-highlight-text">
+                <strong>Adoção Zero-Fricção:</strong> Se você sabe usar o WhatsApp, já sabe gerenciar sua equipe ACORI.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — DESTAQUES / WHY ACORI
+  ═══════════════════════════════════════════ -->
+  <section class="section highlights-section" id="destaques">
+    <div class="section-inner highlights-grid">
+      <!-- Left: Content -->
+      <div class="highlights-content">
+        <span class="section-label reveal">Diferenciais</span>
+        <h2 class="section-title reveal delay-1">Por que escolher o <span>ACORI</span>?</h2>
+        <p class="section-desc reveal delay-2" style="text-align: left;">
+          Uma solução desenhada sob medida para o mercado imobiliário, aliando alta tecnologia local e extrema facilidade de uso.
+        </p>
+
+        <div class="highlight-items">
+          <!-- Item 1 -->
+          <div class="highlight-item reveal delay-3">
+            <div class="hi-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="hi-body">
+              <h3>Adoção Zero-Fricção</h3>
+              <p>Não precisa aprender softwares novos. Se você sabe usar o WhatsApp, já sabe comandar toda a equipe digital do ACORI.</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="highlight-item reveal delay-4">
+            <div class="hi-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="hi-body">
+              <h3>Segurança e Tecnologia Potiguar</h3>
+              <p>Desenvolvida com suporte da UFRN/IMD, com selo de inovação SEBRAE/EMBRAPII. Dados protegidos e hospedados de forma segura.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="highlight-item reveal delay-5">
+            <div class="hi-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="hi-body">
+              <h3>Resultados Imediatos</h3>
+              <p>Comece a "limpar a agenda" de tarefas repetitivas no mesmo dia. Sem período de treinamento, sem implantação complexa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Brand Kit Visual -->
+      <div class="highlights-visual reveal delay-2">
+        <div class="brandkit-wrapper">
+          <div class="brandkit-glow"></div>
+          <img src="assets/brandkit.png" alt="ACORI Brand Kit — Identidade Visual" class="brandkit-img" id="brandkitImage" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5 — RSVP / CONFIRMATION
+  ═══════════════════════════════════════════ -->
+  <section class="section confirm-section" id="confirmar">
+    <div class="hero-grain"></div>
+    <div class="bg-gradient-center"></div>
+    <div class="section-inner text-center">
+      <span class="section-label reveal">Confirmação</span>
+      <h2 class="section-title reveal delay-1">
+        Pronto para transformar<br />
+        a rotina da <span>EMOBI</span>?
+      </h2>
+      <p class="section-desc reveal delay-2">
+        Confirme sua presença e envie sugestões para personalizarmos a reunião de acordo com as necessidades dos corretores.
+      </p>
+
+      <div class="confirm-card reveal delay-3" id="confirmCard">
+        <!-- FORM -->
+        <form class="confirm-form" id="rsvpForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Seu Nome</label>
+              <input type="text" id="name" class="form-input" placeholder="Digite seu nome completo" required />
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" class="form-input" placeholder="(84) 99999-9999" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cargo">Qual sua função na EMOBI?</label>
+            <input type="text" id="cargo" class="form-input" placeholder="Ex: Corretor de Vendas, Gerente, Diretor" required />
+          </div>
+
+          <div class="form-group">
+            <label for="feedback">Dúvidas ou Sugestões para a Pauta</label>
+            <textarea id="feedback" class="form-input form-textarea" placeholder="Deixe aqui uma pergunta ou desafio do seu dia a dia que gostaria de ver resolvido com IA..."></textarea>
+          </div>
+
+          <div class="form-checks">
+            <label class="check-label">
+              <input type="checkbox" id="checkDemo" checked />
+              <span class="checkmark"></span>
+              <span>Quero ver uma simulação personalizada com meus próprios imóveis durante a reunião.</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="checkZap" checked />
+              <span class="checkmark"></span>
+              <span>Desejo testar o estagiário de WhatsApp antes do lançamento geral.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="btnSubmit">
+            <span>Confirmar Presença na Reunião</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </form>
+
+        <!-- SUCCESS STATE -->
+        <div class="success-state" id="successState">
+          <div class="success-checkmark">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10" class="success-circle"/>
+              <polyline points="9 12 12 15 16 9" class="success-check"/>
+            </svg>
+          </div>
+          <h3>Presença Confirmada!</h3>
+          <p>Obrigado por enviar suas sugestões. Nossa equipe vai usá-las para guiar o alinhamento presencial.</p>
+          <a href="https://wa.me/558421324892?text=Ol%C3%A1!%20Confirmei%20presen%C3%A7a%20na%20pauta%20da%20reuni%C3%A3o%20ACORI%20x%20EMOBI." target="_blank" class="btn btn-whatsapp" id="btnWhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>Falar com a equipe via WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/acori-icon.png" alt="ACORI" class="footer-icon" />
+          <img src="assets/acori-name-white.png" alt="ACORI" class="footer-name" />
+        </div>
+        <div class="footer-links">
+          <a href="https://www.acori.ai" target="_blank" class="footer-link">acori.ai</a>
+          <a href="https://wa.me/558421324892" target="_blank" class="footer-link">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <span>Briefing estratégico para os Corretores da <strong>EMOBI — Natal/RN</strong></span>
+        <span>© 2026 ACORI · Todos os direitos reservados</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
