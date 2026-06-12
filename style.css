@@ -1853,9 +1853,9 @@ img { max-width: 100%; display: block; }
     gap: 16px;
   }
 
-  .timeline-item { padding-left: 56px; }
-  .timeline-track { left: 16px; }
-  .timeline-marker { left: 4px; }
+  .timeline-item { padding-left: 0; }
+  .timeline-track { display: none; }
+  .timeline-marker { display: none; }
 
   .compare-grid {
     grid-template-columns: 1fr;
