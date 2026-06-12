@@ -145,29 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackFill = document.getElementById('timelineTrackFill');
 
   if (timeline && trackFill) {
-    const timelineObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const rect = timeline.getBoundingClientRect();
-          const timelineTop = rect.top;
-          const timelineHeight = rect.height;
-          const viewportMiddle = window.innerHeight / 2;
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const trackIndicator = document.getElementById('timelineTrackIndicator');
 
-          const progress = Math.min(
-            Math.max((viewportMiddle - timelineTop) / timelineHeight, 0),
-            1
-          );
-
-          trackFill.style.height = (progress * 100) + '%';
-        }
-      });
-    }, {
-      threshold: Array.from({ length: 100 }, (_, i) => i / 100),
-      rootMargin: '0px'
-    });
-
-    // Use scroll for smoother tracking
-    window.addEventListener('scroll', () => {
+    function updateTimeline() {
       if (!timeline) return;
       const rect = timeline.getBoundingClientRect();
       const timelineTop = rect.top;
@@ -180,7 +161,23 @@ document.addEventListener('DOMContentLoaded', () => {
       );
 
       trackFill.style.height = (progress * 100) + '%';
-    }, { passive: true });
+
+      // Find active step
+      let activeStep = 1;
+      timelineItems.forEach(item => {
+        const itemRect = item.getBoundingClientRect();
+        if (itemRect.top < window.innerHeight * 0.6) {
+          activeStep = parseInt(item.getAttribute('data-step') || '1');
+        }
+      });
+
+      if (trackIndicator) {
+        trackIndicator.textContent = activeStep;
+      }
+    }
+
+    window.addEventListener('scroll', updateTimeline, { passive: true });
+    updateTimeline();
   }
 
   // ─── WHATSAPP CHAT SIMULATOR (driven by card clicks) ───
