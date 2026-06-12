@@ -5,7 +5,7 @@
 
 // URL do Google Apps Script para salvar dados diretamente no Google Sheets.
 // Cole sua URL gerada aqui. Ex: 'https://script.google.com/macros/s/.../exec'
-const GOOGLE_SHEET_API = '';
+const GOOGLE_SHEET_API = 'https://script.google.com/macros/s/AKfycbzKonkckB1X0WGAIKiZrnHsagcEubekVWlaEWMftODiSHsK41qBDAmgNOcR5y6iDReS/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
 
