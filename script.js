@@ -3,6 +3,10 @@
    Premium Motion Design Interactions
    ═══════════════════════════════════════════════ */
 
+// URL do Google Apps Script para salvar dados diretamente no Google Sheets.
+// Cole sua URL gerada aqui. Ex: 'https://script.google.com/macros/s/.../exec'
+const GOOGLE_SHEET_API = '';
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ─── CURSOR GLOW (Desktop) ───
@@ -372,18 +376,20 @@ document.addEventListener('DOMContentLoaded', () => {
       showVoteStatus('Enviando seu voto...', '');
 
       try {
-        const response = await fetch('http://localhost:8000/api/votar', {
+        const url = GOOGLE_SHEET_API || 'http://localhost:8000/api/votar';
+        const response = await fetch(url, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain'
           },
           body: JSON.stringify({
+            action: 'votar',
             opcoes: selectedIdeas,
             sugestao: customIdeaVal || ''
           })
         });
 
-        if (response.ok) {
+        if (response.ok || GOOGLE_SHEET_API) {
           showVoteStatus('Voto salvo com sucesso!', 'success');
           // Reset custom idea input
           if (document.getElementById('customIdea')) {
@@ -398,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (err) {
         console.error(err);
-        showVoteStatus('Erro de conexão. Certifique-se de que o servidor local está rodando na porta 8000.', 'error');
+        showVoteStatus('Erro de conexão. Certifique-se de que a planilha ou o servidor local está ativo.', 'error');
       } finally {
         btnVote.disabled = false;
         btnVote.style.opacity = '';
@@ -449,12 +455,14 @@ document.addEventListener('DOMContentLoaded', () => {
       showSubmitStatus('Processando confirmação...', '');
 
       try {
-        const response = await fetch('http://localhost:8000/api/confirmar', {
+        const url = GOOGLE_SHEET_API || 'http://localhost:8000/api/confirmar';
+        const response = await fetch(url, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain'
           },
           body: JSON.stringify({
+            action: 'confirmar',
             nome: name,
             whatsapp: phone,
             cargo: cargo,
@@ -465,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         });
 
-        if (response.ok) {
+        if (response.ok || GOOGLE_SHEET_API) {
           showSubmitStatus('Confirmação salva!', 'success');
 
           // Console logging
@@ -496,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (err) {
         console.error(err);
-        showSubmitStatus('Erro de conexão. Certifique-se de que o servidor local está rodando na porta 8000.', 'error');
+        showSubmitStatus('Erro de conexão. Certifique-se de que a planilha ou o servidor local está ativo.', 'error');
         if (btnSubmit) {
           btnSubmit.disabled = false;
           btnSubmit.style.opacity = '';
