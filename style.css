@@ -172,6 +172,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 .logo-icon {
   width: 36px;
