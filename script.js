@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scroll the phone into view after animation
     setTimeout(() => {
       if (wppDemo) {
-        wppDemo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        wppDemo.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 350);
   }
