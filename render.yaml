@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: emobi-briefing
+    env: python
+    buildCommand: ""
+    startCommand: "python server.py"
+    disk:
+      name: emobi-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: 8000

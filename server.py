@@ -6,9 +6,13 @@ import os
 import io
 import csv
 
-PORT = 8000
-DB_VOTES = 'votacao_novos_servicos.db'
-DB_PRESENCA = 'lista_de_presenca.db'
+PORT = int(os.environ.get('PORT', 8000))
+
+# Determine database directory (Render persistent disk is mounted at /data)
+DB_DIR = '/data' if os.path.exists('/data') and os.access('/data', os.W_OK) else '.'
+
+DB_VOTES = os.path.join(DB_DIR, 'votacao_novos_servicos.db')
+DB_PRESENCA = os.path.join(DB_DIR, 'lista_de_presenca.db')
 
 # Initialize Databases
 def init_db():
