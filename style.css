@@ -1374,6 +1374,7 @@ img { max-width: 100%; display: block; }
 }
 .custom-idea-input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
@@ -1840,6 +1841,27 @@ img { max-width: 100%; display: block; }
   .compare-arrow {
     transform: rotate(90deg);
     padding: 0;
+  }
+
+  /* Co-creation card mobile optimization */
+  .ideas-box {
+    padding: 16px 14px;
+  }
+  .ideas-tags {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .idea-tag {
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+  .custom-idea-box {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .custom-idea-input {
+    font-size: 13px;
   }
 
   .form-row { grid-template-columns: 1fr; }
